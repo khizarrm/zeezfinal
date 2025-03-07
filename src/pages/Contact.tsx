@@ -19,7 +19,19 @@ function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    
+    // Format the WhatsApp phone number (removing any spaces or special characters)
+    const phoneNumber = '+250791702562';
+    
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(formData.message);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+    
     console.log('Form submitted:', formData);
   };
 
@@ -77,7 +89,7 @@ function Contact() {
             </p>
             <p className="text-lg text-secondary/70 mb-8 text-balance">
               Simply enter your name and service in the field below. 
-              We'll generate an automated message which you can then send to our whatsapp. 
+              We'll generate an automated message which you can then send to our WhatsApp. 
             </p>
           </motion.div>
         </div>
@@ -109,7 +121,7 @@ function Contact() {
                   <Phone className="w-6 h-6 text-accent-terra mr-4 mt-1" />
                   <div>
                     <h3 className="font-medium text-secondary mb-1">Phone</h3>
-                    <p className="text-secondary/70">+ (555) 123-4567</p>
+                    <p className="text-secondary/70">+250 791702562</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -184,7 +196,7 @@ function Contact() {
                   type="submit"
                   className="inline-flex items-center px-6 py-3 bg-secondary text-primary font-medium rounded-full hover:bg-secondary/90 transition-colors"
                 >
-                  Send Message
+                  Send Message via WhatsApp
                   <Send className="ml-2" size={20} />
                 </button>
               </form>
