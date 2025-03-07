@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Argent+CF:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Argent CF', serif;
+  }
+}
+
+.hero-gradient {
+  background: linear-gradient(to bottom, rgba(35, 31, 32, 0.5), rgba(35, 31, 32, 0.2));
+}
+
+.text-balance {
+  text-wrap: balance;
+}
