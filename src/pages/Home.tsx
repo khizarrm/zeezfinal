@@ -30,7 +30,7 @@ function Home() {
             className="max-w-2xl bg-black/50 backdrop-blur-lg p-8 rounded-2xl"
           >
             <h1 className="text-4xl md:text-6xl text-white font-argent mb-6">
-              Transform Your Space Into a Work of Art
+              Kigali's Best Interior Design Service
             </h1>
             <p className="text-lg text-white/90 mb-8 text-balance">
               We create timeless interiors that blend sophistication with functionality,

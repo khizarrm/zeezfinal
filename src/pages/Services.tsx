@@ -37,6 +37,7 @@ function Services() {
                 description: "Full-service interior design tailored to your style and needs. We handle everything from concept development to final styling.",
                 features: [
                   "Space Planning",
+                  "Wall Art",
                   "Color Consultation",
                   "Furniture Selection",
                   "Lighting Design",

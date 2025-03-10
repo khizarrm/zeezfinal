@@ -95,8 +95,8 @@ function About() {
                 description: "Every detail is carefully considered to create harmonious and functional spaces."
               },
               {
-                title: "Sustainability",
-                description: "We prioritize eco-friendly materials and sustainable practices in all our projects."
+                title: "Comfort",
+                description: "We design spaces that authentically reflect who you are while providing the relaxation and ease you deserve."
               },
               {
                 title: "Client Focus",
