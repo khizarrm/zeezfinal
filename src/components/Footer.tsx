@@ -43,7 +43,7 @@ function Footer() {
               <a href="https://www.facebook.com/p/Zeez-Creations-100089067046265/?locale=et_EE" target="_blank" className="text-primary/80 hover:text-primary">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-primary/80 hover:text-primary">
+              <a href="https://www.linkedin.com/company/zeez-creations/" className="text-primary/80 hover:text-primary">
                 <Linkedin size={20} />
               </a>
               <a href="mailto:zscreation45@gmail.com" target="_blank" className="text-primary/80 hover:text-primary">
