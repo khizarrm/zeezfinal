@@ -14,7 +14,9 @@ function Contact() {
     'interior-design': 'Interior Design',
     'handmade-decor': 'Handmade Decor',
     'furniture-refurbishing': 'Furniture Refurbishing',
-    'consultation': 'Consultation'
+    'consultation': 'Consultation',
+    'custom': 'Custom Orders',
+    'other': 'Other',
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -52,14 +54,17 @@ function Contact() {
         const serviceName = serviceValue && serviceMap[serviceValue] ? serviceMap[serviceValue] : 'your services';
         
         let message = '';
-        if (userName) {
-          message = `Hi Zarqa! My name is ${userName} and I'm interested in ${serviceName} at Zeez! `;
-          message += `I would love to schedule a consultation to discuss how you can help transform my space. `;
-          message += `Please contact me at your earliest convenience to discuss the details and provide me with more information about your ${serviceName.toLowerCase()} services and pricing.`;
-        } else {
-          message = `Hi Zarqa! I'm interested in ${serviceName} at Zeez! `;
-          message += `I would love to schedule a consultation to discuss how you can help transform my space. `;
-          message += `Please contact me at your earliest convenience to discuss the details and pricing.`;
+
+        if (serviceName != 'Other'){
+          if (userName) {
+            message = `Hi Zarqa! My name is ${userName} and I'm interested in ${serviceName} at Zeez! `;
+            message += `I would love to schedule a consultation to discuss how you can help transform my space. `;
+            message += `Please contact me at your earliest convenience to discuss the details and provide me with more information about your ${serviceName.toLowerCase()} services and pricing.`;
+          } else {
+            message = `Hi Zarqa! I'm interested in ${serviceName} at Zeez! `;
+            message += `I would love to schedule a consultation to discuss how you can help transform my space. `;
+            message += `Please contact me at your earliest convenience to discuss the details and pricing.`;
+          }
         }
         
         updatedState.message = message;
@@ -176,6 +181,8 @@ function Contact() {
                     <option value="handmade-decor">Handmade Decor</option>
                     <option value="furniture-refurbishing">Furniture Refurbishing</option>
                     <option value="consultation">Consultation</option>
+                    <option value="custom">Custom Order</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
                 <div>
