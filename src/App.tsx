@@ -6,11 +6,13 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import ScrollToTop from './components/ScrollToTop';
 import Projects from './pages/Projects';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-primary flex flex-col">
         <Navbar />
         <main className="flex-grow">

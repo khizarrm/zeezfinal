@@ -134,8 +134,8 @@ function Contact() {
                   <div>
                     <h3 className="font-medium text-secondary mb-1">Studio</h3>
                     <p className="text-secondary/70">
-                      123 Design Street<br />
-                      New York, NY 10001
+                      Kibagabaga,<br />
+                      Kigali, Rwanda
                     </p>
                   </div>
                 </div>
