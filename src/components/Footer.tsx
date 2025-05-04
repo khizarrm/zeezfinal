@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Linkedin, Mail } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, Mail, Twitter } from 'lucide-react';
 
 function Footer() {
   return (
@@ -43,8 +43,8 @@ function Footer() {
               <a href="https://www.facebook.com/p/Zeez-Creations-100089067046265/?locale=et_EE" target="_blank" className="text-primary/80 hover:text-primary">
                 <Facebook size={20} />
               </a>
-              <a href="https://www.linkedin.com/company/zeez-creations/" className="text-primary/80 hover:text-primary">
-                <Linkedin size={20} />
+              <a href="https://x.com/zeezcreations" className="text-primary/80 hover:text-primary">
+                <Twitter size={20} />
               </a>
               <a href="mailto:zscreation45@gmail.com" target="_blank" className="text-primary/80 hover:text-primary">
                 <Mail size={20} />
