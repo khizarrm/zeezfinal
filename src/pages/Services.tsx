@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Table from '../images/table.jpeg';
+import waitingArea from '../images/waiting-area.jpeg'
+import mirror from '../images/mirror.jpg'
 
 function Services() {
   return (
@@ -43,7 +45,7 @@ function Services() {
                   "Lighting Design",
                   "Material Selection"
                 ],
-                image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop"
+                image: waitingArea
               },
               {
                 title: "Handmade Decor",
@@ -55,7 +57,7 @@ function Services() {
                   "Wall Treatments",
                   "Custom Installations"
                 ],
-                image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1200&auto=format&fit=crop"
+                image: mirror
               },
               {
                 title: "Furniture Refurbishing",

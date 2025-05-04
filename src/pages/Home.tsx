@@ -36,13 +36,23 @@ function Home() {
               We create timeless interiors that blend sophistication with functionality,
               turning your vision into reality.
             </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center px-6 py-3 bg-white text-secondary font-medium rounded-full hover:bg-primary transition-colors"
-            >
-              Book a Consultation
-              <ArrowRight className="ml-2" size={20} />
-            </Link>
+            <div className="flex flex-col gap-4 w-fit">
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-6 py-3 bg-white text-secondary font-medium rounded-full hover:bg-primary transition-colors"
+              >
+                Book a Consultation
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+
+              <Link
+                to="/projects"
+                className="inline-flex items-center px-6 py-3 bg-secondary text-primary font-medium rounded-full hover:bg-secondary/90 transition-colors"
+              >
+                View Portfolio
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -132,9 +142,8 @@ function Home() {
                 into a modern sanctuary, blending comfort with sophisticated design.
               </p>
               <Link
-                to="https://www.instagram.com/zeezcreationskigali/"
+                to="/projects"
                 className="inline-flex items-center px-6 py-3 bg-secondary text-primary font-medium rounded-full hover:bg-secondary/90 transition-colors"
-                target="_blank"
               >
                 View Portfolio
                 <ArrowRight className="ml-2" size={20} />

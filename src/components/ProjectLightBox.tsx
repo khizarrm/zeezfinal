@@ -55,6 +55,7 @@ function ProjectLightbox({ isOpen, onClose, project }: ProjectLightboxProps) {
       project ? (prevIndex === project.images.length - 1 ? 0 : prevIndex + 1) : prevIndex
     );
   };
+
   
   if (!isOpen || !project) return null;
   

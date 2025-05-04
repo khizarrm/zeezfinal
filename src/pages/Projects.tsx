@@ -4,6 +4,44 @@ import { ArrowRight, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ProjectLightbox from '../components/ProjectLightBox';
 
+//urbankParkHotel
+const urbanParkImports = import.meta.glob('./project-photos/urban-park/*.jpeg', { eager: true }) as Record<string, { default: string }>;
+const urbanParkImages = Object.entries(urbanParkImports)
+  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
+  .map(([, mod]) => mod.default);
+
+
+//balcony 
+const balconyImports = import.meta.glob('./project-photos/balcony-makeover/*.jpg', { eager: true }) as Record<string, { default: string }>;
+const balconyImages = Object.entries(balconyImports)
+  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
+  .map(([, mod]) => mod.default);
+
+//trays,coasters and placemats
+const trayImports = import.meta.glob('./project-photos/trays-coasters-placemats/*.jpg', { eager: true }) as Record<string, { default: string }>;
+const trayImages = Object.entries(trayImports)
+  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
+  .map(([, mod]) => mod.default);
+
+//tables
+const tableImports = import.meta.glob('./project-photos/tables/*.jpg', { eager: true }) as Record<string, { default: string }>;
+const tableImages = Object.entries(tableImports)
+  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
+  .map(([, mod]) => mod.default);
+
+
+//vases
+const vaseImports = import.meta.glob('./project-photos/candle-holders/*.jpg', { eager: true }) as Record<string, { default: string }>;
+const vaseImages = Object.entries(vaseImports)
+  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
+  .map(([, mod]) => mod.default);
+
+//refurbished tables
+const refurbishedTableImports = import.meta.glob('./project-photos/refurbished-tables/*.jpg', { eager: true }) as Record<string, { default: string }>;
+const refurbishedTableImages = Object.entries(refurbishedTableImports)
+  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
+  .map(([, mod]) => mod.default);
+    
 function Portfolio() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [filteredProjects, setFilteredProjects] = useState<typeof projects>([]);
@@ -22,80 +60,56 @@ function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: "Modern Minimalist Living Room",
+      title: "Urban Park Suites Hotel",
       category: "Interior Design",
-      description: "A complete redesign of a living space focusing on clean lines and functional elements.",
-      imageUrl: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
-      images: [
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1618219944342-824e40a13285?q=80&w=800&auto=format&fit=crop"
-      ],
+      description: "A complete redesign of a hotel space focusing on clean lines and functional elements.",
+      imageUrl: urbanParkImages[0],
+      images: urbanParkImages,
       featured: true
     },
     {
       id: 2,
-      title: "Rustic Dining Table Restoration",
-      category: "Furniture Refurbishing",
-      description: "Bringing new life to an antique dining table with careful restoration techniques.",
-      imageUrl: "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?q=80&w=800&auto=format&fit=crop",
-      images: [
-        "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1533090368676-1fd25485db88?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1597072689227-8882273e8f6a?q=80&w=800&auto=format&fit=crop"
-      ],
+      title: "Residential Balcony",
+      category: "Interior Design",
+      description: "Bringing new life to an old balcony for a Kigali resident.",
+      imageUrl: balconyImages[0],
+      images: balconyImages,
       featured: false
     },
     {
       id: 3,
-      title: "Handcrafted Ceramic Vases",
+      title: "Trays, Coasters, Placemats",
       category: "Handmade Decor",
-      description: "Custom designed and created ceramic pieces for a modern apartment.",
-      imageUrl: "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?q=80&w=800&auto=format&fit=crop",
-      images: [
-        "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1526066900882-01217e9b151f?q=80&w=800&auto=format&fit=crop"
-      ],
+      description: "Highest quality handmade table decor.",
+      imageUrl: trayImages[6],
+      images: trayImages,
       featured: false
     },
     {
       id: 4,
-      title: "Bohemian Bedroom Makeover",
-      category: "Interior Design",
-      description: "A complete transformation of a bedroom into a bohemian retreat.",
-      imageUrl: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=800&auto=format&fit=crop",
-      images: [
-        "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1610727899747-e883fbd5d15a?q=80&w=800&auto=format&fit=crop"
-      ],
+      title: "Butler Tables",
+      category: "Handmade Decor",
+      description: "A collection of our handmade butler tables.",
+      imageUrl: tableImages[2],
+      images: tableImages,
       featured: true
     },
     {
       id: 5,
-      title: "Custom Wooden Shelving",
+      title: "Vases & Holders",
       category: "Handmade Decor",
-      description: "Bespoke shelving units designed to maximize space and aesthetics.",
-      imageUrl: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=800&auto=format&fit=crop",
-      images: [
-        "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1531882287584-375084a9e7a1?q=80&w=800&auto=format&fit=crop"
-      ],
+      description: "Artful objects that bring warmth, texture, and soul to your space.",
+      imageUrl: vaseImages[5],
+      images: vaseImages,
       featured: false
     },
     {
       id: 6,
-      title: "Mid-Century Chair Reupholstery",
+      title: "Refurbished Tables",
       category: "Furniture Refurbishing",
-      description: "Breathing new life into classic mid-century chairs with premium fabrics.",
-      imageUrl: "https://images.unsplash.com/photo-1567016432779-094069958ea5?q=80&w=800&auto=format&fit=crop",
-      images: [
-        "https://images.unsplash.com/photo-1567016432779-094069958ea5?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1579656592043-a20e25a4aa4b?q=80&w=800&auto=format&fit=crop"
-      ],
+      description: "Revived and reimagined tables, each with a story and a new life.",
+      imageUrl: refurbishedTableImages[2],
+      images: refurbishedTableImages,
       featured: false
     }
   ];
@@ -120,7 +134,7 @@ function Portfolio() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl text-secondary font-argent mb-6">
+            <h1 className="text-4xl md:text-5xl text-secondary font-argent mb-6 mt-6 p-8">
               Our Portfolio
             </h1>
             <p className="text-lg text-secondary/70 max-w-2xl mx-auto mb-8 text-balance">
