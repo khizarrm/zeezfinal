@@ -65,7 +65,7 @@ function ProjectLightbox({ isOpen, onClose, project }: ProjectLightboxProps) {
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-secondary/90 backdrop-blur-sm p-4 md:p-6"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-secondary/90 backdrop-blur-sm"
       >
         {/* Close button */}
         <button 
@@ -76,15 +76,10 @@ function ProjectLightbox({ isOpen, onClose, project }: ProjectLightboxProps) {
           <X size={24} />
         </button>
         
-        <div className="relative w-full max-w-5xl">
-          {/* Project info */}
-          <div className="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm p-4 md:p-6">
-            <h3 className="text-xl md:text-2xl font-argent text-secondary">{project.title}</h3>
-            <p className="text-sm text-secondary/70 mt-1">{project.category}</p>
-          </div>
+        <div className="relative w-full h-full">
           
           {/* Image */}
-          <div className="relative aspect-[4/3] bg-black/20 overflow-hidden rounded-lg">
+          <div className="relative w-full h-full bg-black/20 overflow-hidden rounded-lg">
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentImageIndex}
@@ -99,7 +94,7 @@ function ProjectLightbox({ isOpen, onClose, project }: ProjectLightboxProps) {
             </AnimatePresence>
             
             {/* Image counter */}
-            <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-secondary">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-secondary">
               {currentImageIndex + 1} / {project.images.length}
             </div>
           </div>

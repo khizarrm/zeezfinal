@@ -127,6 +127,14 @@ function Portfolio() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative py-20 bg-primary">
+      <div className="absolute inset-0">
+        <img
+          src = {balconyImages[2]}
+          alt="Background"
+          className="w-full h-full object-cover blur-lg opacity-20"
+        />
+      </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
