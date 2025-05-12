@@ -33,8 +33,7 @@ function Home() {
               Crafting Beautiful Interiors Throughout Kigali
             </h1>
             <p className="text-lg text-white/90 mb-8 text-balance">
-              We create timeless interiors that blend sophistication with functionality,
-              turning your vision into reality.
+              We deliver world-class interior design and decoration services, upholding the highest standards of quality and craftsmanship in every project we undertake.
             </p>
             <div className="flex flex-col gap-4 w-fit">
               <Link
