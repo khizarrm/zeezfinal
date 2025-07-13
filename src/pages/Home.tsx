@@ -7,7 +7,7 @@ import Balcony from '../images/balcony.jpeg';
 import Mirror from '../images/mirror.jpg'
 import Table from '../images/table.jpeg'
 import Reception from '../images/reception.jpeg'
-import Couch from '../images/couch.jpeg'
+import ReberoBackground from '../images/rebero-11.png'
 
 function Home() {
   return (
@@ -16,7 +16,7 @@ function Home() {
 <section className="relative h-screen">
         <div className="absolute inset-0">
         <OptimizedImage
-          src={Couch}
+          src={ReberoBackground}
           alt="Modern interior design"
           className="w-full h-full object-cover"
           lazy={false}

@@ -5,7 +5,11 @@
       "Bash(rm:*)",
       "Bash(npm run dev:*)",
       "Bash(pkill:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(for i in {1..20})",
+      "Bash(do cp \"$i.png\" \"../src/pages/project-photos/rebero-mansion/rebero-$i.png\")",
+      "Bash(done)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

@@ -42,6 +42,12 @@ const refurbishedTableImports = import.meta.glob('./project-photos/refurbished-t
 const refurbishedTableImages = Object.entries(refurbishedTableImports)
   .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
   .map(([, mod]) => mod.default);
+
+//rebero mansion
+const reberoMansionImports = import.meta.glob('./project-photos/rebero-mansion/*.png', { eager: true }) as Record<string, { default: string }>;
+const reberoMansionImages = Object.entries(reberoMansionImports)
+  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
+  .map(([, mod]) => mod.default);
     
 function Portfolio() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -61,6 +67,16 @@ function Portfolio() {
   const projects = [
     {
       id: 1,
+      title: "Rebero Mansion",
+      category: "Interior Design",
+      description: "A luxurious residential mansion design featuring contemporary architecture and elegant interior spaces in Rebero, Kigali.",
+      imageUrl: reberoMansionImages[0],
+      images: reberoMansionImages,
+      featured: true,
+      tag: "New"
+    },
+    {
+      id: 2,
       title: "Urban Park Suites Hotel",
       category: "Interior Design",
       description: "A complete redesign of a hotel space focusing on clean lines and functional elements.",
@@ -69,7 +85,7 @@ function Portfolio() {
       featured: true
     },
     {
-      id: 2,
+      id: 3,
       title: "Residential Balcony",
       category: "Interior Design",
       description: "Bringing new life to an old balcony for a Kigali resident.",
@@ -78,7 +94,7 @@ function Portfolio() {
       featured: false
     },
     {
-      id: 3,
+      id: 4,
       title: "Trays, Coasters, Placemats",
       category: "Handmade Decor",
       description: "Highest quality handmade table decor.",
@@ -87,7 +103,7 @@ function Portfolio() {
       featured: false
     },
     {
-      id: 4,
+      id: 5,
       title: "Butler Tables",
       category: "Handmade Decor",
       description: "A collection of our handmade butler tables.",
@@ -96,7 +112,7 @@ function Portfolio() {
       featured: true
     },
     {
-      id: 5,
+      id: 6,
       title: "Vases & Holders",
       category: "Handmade Decor",
       description: "Artful objects that bring warmth, texture, and soul to your space.",
@@ -105,7 +121,7 @@ function Portfolio() {
       featured: false
     },
     {
-      id: 6,
+      id: 7,
       title: "Refurbished Tables",
       category: "Furniture Refurbishing",
       description: "Revived and reimagined tables, each with a story and a new life.",
@@ -200,11 +216,18 @@ function Portfolio() {
                   className="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="relative overflow-hidden h-64">
-                    {project.featured && (
-                      <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-xs font-medium text-secondary z-10">
-                        Featured
-                      </div>
-                    )}
+                    <div className="absolute top-4 right-4 flex gap-2 z-10">
+                      {project.tag && (
+                        <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                          {project.tag}
+                        </div>
+                      )}
+                      {project.featured && (
+                        <div className="bg-white px-3 py-1 rounded-full text-xs font-medium text-secondary">
+                          Featured
+                        </div>
+                      )}
+                    </div>
                     <OptimizedImage
                       src={project.imageUrl}
                       alt={project.title}
