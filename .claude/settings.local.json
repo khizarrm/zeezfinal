@@ -9,7 +9,10 @@
       "Bash(for i in {1..20})",
       "Bash(do cp \"$i.png\" \"../src/pages/project-photos/rebero-mansion/rebero-$i.png\")",
       "Bash(done)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(sips:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

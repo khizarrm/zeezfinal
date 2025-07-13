@@ -7,6 +7,7 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   lazy?: boolean;
+  quality?: number;
 }
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -16,6 +17,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   width,
   height,
   lazy = true,
+  quality = 80,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(!lazy);
@@ -35,7 +37,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '100px' }
+      { threshold: 0.1, rootMargin: '200px' }
     );
 
     if (imgRef.current) {
@@ -95,6 +97,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           loading={lazy ? 'lazy' : 'eager'}
           onLoad={handleLoad}
           onError={handleError}
+          decoding="async"
+          fetchPriority={lazy ? 'low' : 'high'}
         />
       )}
     </div>

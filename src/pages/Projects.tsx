@@ -30,7 +30,7 @@ const refurbishedTableImports = import.meta.glob('./project-photos/refurbished-t
 const refurbishedTableImagePaths = Object.keys(refurbishedTableImports).sort();
 
 //rebero mansion
-const reberoMansionImports = import.meta.glob('./project-photos/rebero-mansion/*.png') as Record<string, () => Promise<{ default: string }>>;
+const reberoMansionImports = import.meta.glob('./project-photos/rebero-mansion/*.jpg') as Record<string, () => Promise<{ default: string }>>;
 const reberoMansionImagePaths = Object.keys(reberoMansionImports).sort();
 
 // Helper function to load images dynamically

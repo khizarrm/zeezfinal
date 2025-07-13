@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, Award } from 'lucide-react';
 import OptimizedImage from '../components/OptimizedImage';
 import ContactReception from '../images/contact-reception.jpeg';
-import ContactWine from '../images/contact-wine.png';
+import ContactWine from '../images/contact-wine.jpg';
 
 function Contact() {
   const [formData, setFormData] = useState({

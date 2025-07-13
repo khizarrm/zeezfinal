@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, Star, Award, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import OptimizedImage from '../components/OptimizedImage';
-import ServiceInterior from '../images/service-interior.png';
-import ServiceExterior from '../images/service-exterior.png';
-import ServiceLuxury from '../images/service-luxury.png';
+import ServiceInterior from '../images/service-interior.jpg';
+import ServiceExterior from '../images/service-exterior.jpg';
+import ServiceLuxury from '../images/service-luxury.jpg';
 
 function Services() {
   const services = [

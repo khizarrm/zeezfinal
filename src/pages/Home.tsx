@@ -6,8 +6,8 @@ import OptimizedImage from '../components/OptimizedImage';
 import Balcony from '../images/balcony.jpeg';
 import Mirror from '../images/mirror.jpg'
 import Table from '../images/table.jpeg'
-import ReberoFeatured from '../images/rebero-featured.png'
-import ReberoBackground from '../images/rebero-11.png'
+import ReberoFeatured from '../images/rebero-featured.jpg'
+import ReberoBackground from '../images/rebero-11.jpg'
 
 function Home() {
   return (
