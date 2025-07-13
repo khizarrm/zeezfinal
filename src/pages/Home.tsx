@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import OptimizedImage from '../components/OptimizedImage';
 import Balcony from '../images/balcony.jpeg';
 import Mirror from '../images/mirror.jpg'
 import Table from '../images/table.jpeg'
@@ -14,10 +15,11 @@ function Home() {
 {/* Hero Section */}
 <section className="relative h-screen">
         <div className="absolute inset-0">
-        <img
+        <OptimizedImage
           src={Couch}
           alt="Modern interior design"
           className="w-full h-full object-cover"
+          lazy={false}
         />
           <div className="absolute inset-0 hero-gradient" />
         </div>
@@ -102,10 +104,11 @@ function Home() {
                 className="group"
               >
                 <div className="relative overflow-hidden rounded-lg mb-4">
-                  <img
+                  <OptimizedImage
                     src={service.image}
                     alt={service.title}
                     className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                    height={256}
                   />
                 </div>
                 <h3 className="text-xl font-argent text-secondary mb-2">{service.title}</h3>
@@ -155,10 +158,11 @@ function Home() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <img
+              <OptimizedImage
                 src={Reception}
                 alt="Featured project"
                 className="rounded-lg shadow-xl w-full h-72 object-cover"
+                height={288}
               />
             </motion.div>
           </div>

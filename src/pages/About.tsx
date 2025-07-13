@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import OptimizedImage from '../components/OptimizedImage';
 import Founder from '../images/mom.jpeg'
 
 function About() {
@@ -39,7 +40,7 @@ function About() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <img
+              <OptimizedImage
                 src={Founder}
                 alt="Interior designer at work"
                 className="rounded-lg shadow-xl"

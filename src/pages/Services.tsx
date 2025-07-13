@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import OptimizedImage from '../components/OptimizedImage';
 import Table from '../images/table.jpeg';
 import waitingArea from '../images/waiting-area.jpeg'
 import mirror from '../images/mirror.jpg'
@@ -82,10 +83,11 @@ function Services() {
               >
                 <div className={`relative ${index % 2 === 1 ? 'md:order-2' : ''}`}>
                   <div className="w-full h-64 md:h-96 overflow-hidden rounded-lg shadow-xl">
-                    <img
+                    <OptimizedImage
                       src={service.image}
                       alt={service.title}
                       className="w-full h-full object-cover"
+                      height={384}
                     />
                   </div>
                 </div>
