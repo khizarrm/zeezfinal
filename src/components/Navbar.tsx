@@ -19,11 +19,11 @@ function Navbar() {
   return (
     <nav className="bg-white/90 backdrop-blur-sm fixed w-full z-50 border-b border-secondary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-20">
           <div className="flex items-center">
-          <Link to="/" className="font-argent text-2xl text-secondary">
-            <img src={logo} alt='logo' className='h-20 w-auto'  />
-          </Link>
+            <Link to="/" className="font-argent text-2xl text-secondary">
+              <img src={logo} alt='Zeez Creations Logo' className='h-16 w-auto' />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}

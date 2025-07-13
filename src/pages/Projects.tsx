@@ -1,59 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import ProjectLightbox from '../components/ProjectLightBox';
 import OptimizedImage from '../components/OptimizedImage';
 
 //urbankParkHotel
-const urbanParkImports = import.meta.glob('./project-photos/urban-park/*.jpeg', { eager: true }) as Record<string, { default: string }>;
-const urbanParkImages = Object.entries(urbanParkImports)
-  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
-  .map(([, mod]) => mod.default);
-
+const urbanParkImports = import.meta.glob('./project-photos/urban-park/*.jpeg') as Record<string, () => Promise<{ default: string }>>;
+const urbanParkImagePaths = Object.keys(urbanParkImports).sort();
 
 //balcony 
-const balconyImports = import.meta.glob('./project-photos/balcony-makeover/*.jpg', { eager: true }) as Record<string, { default: string }>;
-const balconyImages = Object.entries(balconyImports)
-  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
-  .map(([, mod]) => mod.default);
+const balconyImports = import.meta.glob('./project-photos/balcony-makeover/*.jpg') as Record<string, () => Promise<{ default: string }>>;
+const balconyImagePaths = Object.keys(balconyImports).sort();
 
 //trays,coasters and placemats
-const trayImports = import.meta.glob('./project-photos/trays-coasters-placemats/*.jpg', { eager: true }) as Record<string, { default: string }>;
-const trayImages = Object.entries(trayImports)
-  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
-  .map(([, mod]) => mod.default);
+const trayImports = import.meta.glob('./project-photos/trays-coasters-placemats/*.jpg') as Record<string, () => Promise<{ default: string }>>;
+const trayImagePaths = Object.keys(trayImports).sort();
 
 //tables
-const tableImports = import.meta.glob('./project-photos/tables/*.jpg', { eager: true }) as Record<string, { default: string }>;
-const tableImages = Object.entries(tableImports)
-  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
-  .map(([, mod]) => mod.default);
-
+const tableImports = import.meta.glob('./project-photos/tables/*.jpg') as Record<string, () => Promise<{ default: string }>>;
+const tableImagePaths = Object.keys(tableImports).sort();
 
 //vases
-const vaseImports = import.meta.glob('./project-photos/candle-holders/*.jpg', { eager: true }) as Record<string, { default: string }>;
-const vaseImages = Object.entries(vaseImports)
-  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
-  .map(([, mod]) => mod.default);
+const vaseImports = import.meta.glob('./project-photos/candle-holders/*.jpg') as Record<string, () => Promise<{ default: string }>>;
+const vaseImagePaths = Object.keys(vaseImports).sort();
 
 //refurbished tables
-const refurbishedTableImports = import.meta.glob('./project-photos/refurbished-tables/*.jpg', { eager: true }) as Record<string, { default: string }>;
-const refurbishedTableImages = Object.entries(refurbishedTableImports)
-  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
-  .map(([, mod]) => mod.default);
+const refurbishedTableImports = import.meta.glob('./project-photos/refurbished-tables/*.jpg') as Record<string, () => Promise<{ default: string }>>;
+const refurbishedTableImagePaths = Object.keys(refurbishedTableImports).sort();
 
 //rebero mansion
-const reberoMansionImports = import.meta.glob('./project-photos/rebero-mansion/*.png', { eager: true }) as Record<string, { default: string }>;
-const reberoMansionImages = Object.entries(reberoMansionImports)
-  .sort(([a], [b]) => a.localeCompare(b)) // optional: sort alphabetically
-  .map(([, mod]) => mod.default);
+const reberoMansionImports = import.meta.glob('./project-photos/rebero-mansion/*.png') as Record<string, () => Promise<{ default: string }>>;
+const reberoMansionImagePaths = Object.keys(reberoMansionImports).sort();
+
+// Helper function to load images dynamically
+const loadImages = async (paths: string[], imports: Record<string, () => Promise<{ default: string }>>) => {
+  const imagePromises = paths.map(async (path) => {
+    const module = await imports[path]();
+    return module.default;
+  });
+  return Promise.all(imagePromises);
+};
     
 function Portfolio() {
+  const [searchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [filteredProjects, setFilteredProjects] = useState<typeof projects>([]);
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [filteredProjects, setFilteredProjects] = useState<any[]>([]);
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Record<string, string[]>>({});
+  const [projects, setProjects] = useState<any[]>([]);
+  const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
   
   // Categories for filtering
   const categories = [
@@ -62,74 +59,129 @@ function Portfolio() {
     'Handmade Decor',
     'Furniture Refurbishing'
   ];
-  
-  // Project data with multiple images
-  const projects = [
-    {
-      id: 1,
-      title: "Rebero Mansion",
-      category: "Interior Design",
-      description: "A luxurious residential mansion design featuring contemporary architecture and elegant interior spaces in Rebero, Kigali.",
-      imageUrl: reberoMansionImages[0],
-      images: reberoMansionImages,
-      featured: true,
-      tag: "New"
-    },
-    {
-      id: 2,
-      title: "Urban Park Suites Hotel",
-      category: "Interior Design",
-      description: "A complete redesign of a hotel space focusing on clean lines and functional elements.",
-      imageUrl: urbanParkImages[0],
-      images: urbanParkImages,
-      featured: true
-    },
-    {
-      id: 3,
-      title: "Residential Balcony",
-      category: "Interior Design",
-      description: "Bringing new life to an old balcony for a Kigali resident.",
-      imageUrl: balconyImages[0],
-      images: balconyImages,
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Trays, Coasters, Placemats",
-      category: "Handmade Decor",
-      description: "Highest quality handmade table decor.",
-      imageUrl: trayImages[6],
-      images: trayImages,
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Butler Tables",
-      category: "Handmade Decor",
-      description: "A collection of our handmade butler tables.",
-      imageUrl: tableImages[2],
-      images: tableImages,
-      featured: true
-    },
-    {
-      id: 6,
-      title: "Vases & Holders",
-      category: "Handmade Decor",
-      description: "Artful objects that bring warmth, texture, and soul to your space.",
-      imageUrl: vaseImages[5],
-      images: vaseImages,
-      featured: false
-    },
-    {
-      id: 7,
-      title: "Refurbished Tables",
-      category: "Furniture Refurbishing",
-      description: "Revived and reimagined tables, each with a story and a new life.",
-      imageUrl: refurbishedTableImages[2],
-      images: refurbishedTableImages,
-      featured: false
+
+  // Load images and initialize projects
+  useEffect(() => {
+    const initializeProjects = async () => {
+      try {
+        // Load only the first image of each project for thumbnails
+        const [
+          reberoFirst,
+          urbanParkFirst,
+          balconyFirst,
+          trayFirst,
+          tableFirst,
+          vaseFirst,
+          refurbishedFirst
+        ] = await Promise.all([
+          reberoMansionImports[reberoMansionImagePaths[0]](),
+          urbanParkImports[urbanParkImagePaths[0]](),
+          balconyImports[balconyImagePaths[0]](),
+          trayImports[trayImagePaths[6] || trayImagePaths[0]](),
+          tableImports[tableImagePaths[2] || tableImagePaths[0]](),
+          vaseImports[vaseImagePaths[5] || vaseImagePaths[0]](),
+          refurbishedTableImports[refurbishedTableImagePaths[2] || refurbishedTableImagePaths[0]]()
+        ]);
+
+        const initialProjects = [
+          {
+            id: 1,
+            title: "Rebero Mansion",
+            category: "Interior Design",
+            description: "A luxurious residential mansion design featuring contemporary architecture and elegant interior spaces in Rebero, Kigali.",
+            imageUrl: reberoFirst.default,
+            imagePaths: reberoMansionImagePaths,
+            imports: reberoMansionImports,
+            featured: true,
+            tag: "New"
+          },
+          {
+            id: 2,
+            title: "Urban Park Suites Hotel",
+            category: "Interior Design",
+            description: "A complete redesign of a hotel space focusing on clean lines and functional elements.",
+            imageUrl: urbanParkFirst.default,
+            imagePaths: urbanParkImagePaths,
+            imports: urbanParkImports,
+            featured: true
+          },
+          {
+            id: 3,
+            title: "Residential Balcony",
+            category: "Interior Design",
+            description: "Bringing new life to an old balcony for a Kigali resident.",
+            imageUrl: balconyFirst.default,
+            imagePaths: balconyImagePaths,
+            imports: balconyImports,
+            featured: false
+          },
+          {
+            id: 4,
+            title: "Trays, Coasters, Placemats",
+            category: "Handmade Decor",
+            description: "Highest quality handmade table decor.",
+            imageUrl: trayFirst.default,
+            imagePaths: trayImagePaths,
+            imports: trayImports,
+            featured: false
+          },
+          {
+            id: 5,
+            title: "Butler Tables",
+            category: "Handmade Decor",
+            description: "A collection of our handmade butler tables.",
+            imageUrl: tableFirst.default,
+            imagePaths: tableImagePaths,
+            imports: tableImports,
+            featured: true
+          },
+          {
+            id: 6,
+            title: "Vases & Holders",
+            category: "Handmade Decor",
+            description: "Artful objects that bring warmth, texture, and soul to your space.",
+            imageUrl: vaseFirst.default,
+            imagePaths: vaseImagePaths,
+            imports: vaseImports,
+            featured: false
+          },
+          {
+            id: 7,
+            title: "Refurbished Tables",
+            category: "Furniture Refurbishing",
+            description: "Revived and reimagined tables, each with a story and a new life.",
+            imageUrl: refurbishedFirst.default,
+            imagePaths: refurbishedTableImagePaths,
+            imports: refurbishedTableImports,
+            featured: false
+          }
+        ];
+
+        setProjects(initialProjects);
+        
+        // Set hero background image (balcony image)
+        if (balconyImagePaths.length > 2) {
+          const heroImage = await balconyImports[balconyImagePaths[2]]();
+          setHeroBackgroundImage(heroImage.default);
+        }
+      } catch (error) {
+        console.error('Error loading project images:', error);
+      }
+    };
+
+    initializeProjects();
+  }, []);
+
+  // Handle URL parameter to open specific project
+  useEffect(() => {
+    const projectParam = searchParams.get('project');
+    if (projectParam === 'rebero-mansion' && projects.length > 0) {
+      const reberoProject = projects.find(p => p.title === 'Rebero Mansion');
+      if (reberoProject) {
+        handleViewGallery(reberoProject);
+      }
     }
-  ];
+  }, [projects, searchParams]);
   
   // Filter projects when category changes
   useEffect(() => {
@@ -138,20 +190,51 @@ function Portfolio() {
         ? projects
         : projects.filter(project => project.category === selectedCategory)
     );
-  }, [selectedCategory]);
+  }, [selectedCategory, projects]);
+
+  // Load all images for a project (for lightbox)
+  const loadProjectImages = async (project: any) => {
+    if (loadedImages[project.id]) {
+      return loadedImages[project.id];
+    }
+
+    try {
+      const images = await loadImages(project.imagePaths, project.imports);
+      setLoadedImages(prev => ({
+        ...prev,
+        [project.id]: images
+      }));
+      return images;
+    } catch (error) {
+      console.error('Error loading project gallery:', error);
+      return [];
+    }
+  };
+
+  // Handle lightbox opening
+  const handleViewGallery = async (project: any) => {
+    const images = await loadProjectImages(project);
+    setSelectedProject({
+      ...project,
+      images
+    });
+    setLightboxOpen(true);
+  };
   
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative py-20 bg-primary">
-      <div className="absolute inset-0">
-        <OptimizedImage
-          src={balconyImages[2]}
-          alt="Background"
-          className="w-full h-full object-cover blur-lg opacity-20"
-          lazy={false}
-        />
-      </div>
+      {heroBackgroundImage && (
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src={heroBackgroundImage}
+            alt="Background"
+            className="w-full h-full object-cover blur-lg opacity-20"
+            lazy={false}
+          />
+        </div>
+      )}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -236,10 +319,7 @@ function Portfolio() {
                     />
                     <div className="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <button
-                        onClick={() => {
-                          setSelectedProject(project);
-                          setLightboxOpen(true);
-                        }}
+                        onClick={() => handleViewGallery(project)}
                         className="bg-white text-secondary p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform"
                         aria-label={`View ${project.title} images`}
                       >
@@ -260,10 +340,7 @@ function Portfolio() {
                       {project.description}
                     </p>
                     <button
-                      onClick={() => {
-                        setSelectedProject(project);
-                        setLightboxOpen(true);
-                      }}
+                      onClick={() => handleViewGallery(project)}
                       className="inline-flex items-center text-secondary hover:text-secondary/80 transition-colors text-sm font-medium"
                     >
                       View Gallery

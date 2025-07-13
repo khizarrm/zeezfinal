@@ -6,7 +6,7 @@ import OptimizedImage from '../components/OptimizedImage';
 import Balcony from '../images/balcony.jpeg';
 import Mirror from '../images/mirror.jpg'
 import Table from '../images/table.jpeg'
-import Reception from '../images/reception.jpeg'
+import ReberoFeatured from '../images/rebero-featured.png'
 import ReberoBackground from '../images/rebero-11.png'
 
 function Home() {
@@ -139,17 +139,26 @@ function Home() {
               <h2 className="text-3xl md:text-4xl font-argent text-secondary mb-4">
                 Recent Work
               </h2>
-              <p className="text-secondary/70 mb-6 text-balance">
-                Explore our latest project where we transformed a traditional space
-                into a modern sanctuary, blending comfort with sophisticated design.
+              <p className="text-secondary/70 mb-8 text-balance">
+                Discover our latest luxury mansion project in Rebero, where we created 
+                contemporary elegance with sophisticated design and premium finishes.
               </p>
-              <Link
-                to="/projects"
-                className="inline-flex items-center px-6 py-3 bg-secondary text-primary font-medium rounded-full hover:bg-secondary/90 transition-colors"
-              >
-                View Portfolio
-                <ArrowRight className="ml-2" size={20} />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  to="/projects?project=rebero-mansion"
+                  className="inline-flex items-center px-6 py-3 bg-secondary text-primary font-medium rounded-full hover:bg-secondary/90 transition-colors"
+                >
+                  View Latest Project
+                  <ArrowRight className="ml-2" size={20} />
+                </Link>
+                <Link
+                  to="/projects"
+                  className="inline-flex items-center px-6 py-3 bg-transparent border-2 border-secondary text-secondary font-medium rounded-full hover:bg-secondary hover:text-primary transition-colors"
+                >
+                  View Portfolio
+                  <ArrowRight className="ml-2" size={20} />
+                </Link>
+              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -159,8 +168,8 @@ function Home() {
               className="relative"
             >
               <OptimizedImage
-                src={Reception}
-                alt="Featured project"
+                src={ReberoFeatured}
+                alt="Rebero Mansion - Latest Project"
                 className="rounded-lg shadow-xl w-full h-72 object-cover"
                 height={288}
               />

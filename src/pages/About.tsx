@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Heart, Users, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import OptimizedImage from '../components/OptimizedImage';
 import Founder from '../images/mom.jpeg'
@@ -42,8 +42,9 @@ function About() {
             >
               <OptimizedImage
                 src={Founder}
-                alt="Interior designer at work"
-                className="rounded-lg shadow-xl"
+                alt="Zarqa Murtaza - Founder of Zeez Creations"
+                className="rounded-lg shadow-xl w-full h-[450px] md:h-[550px] lg:h-[650px] object-cover object-top"
+                height={650}
               />
             </motion.div>
             <motion.div
@@ -93,27 +94,53 @@ function About() {
             {[
               {
                 title: "Thoughtful Design",
-                description: "Every detail is carefully considered to create harmonious and functional spaces."
+                description: "Every detail is carefully considered to create harmonious and functional spaces that inspire and delight.",
+                icon: Lightbulb,
+                gradient: "from-amber-800 to-orange-900"
               },
               {
-                title: "Comfort",
-                description: "We design spaces that authentically reflect who you are while providing the relaxation and ease you deserve."
+                title: "Authentic Comfort",
+                description: "We design spaces that authentically reflect who you are while providing the relaxation and ease you deserve.",
+                icon: Heart,
+                gradient: "from-amber-700 to-yellow-800"
               },
               {
-                title: "Client Focus",
-                description: "Your vision and satisfaction are at the heart of everything we do."
+                title: "Client Partnership",
+                description: "Your vision and satisfaction are at the heart of everything we do. We listen, collaborate, and deliver excellence.",
+                icon: Users,
+                gradient: "from-yellow-700 to-amber-800"
               }
             ].map((value, index) => (
               <motion.div
                 key={value.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="text-center p-8 rounded-lg bg-primary"
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="group relative"
               >
-                <h3 className="text-xl font-argent text-secondary mb-4">{value.title}</h3>
-                <p className="text-secondary/70">{value.description}</p>
+                <div className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10">
+                  {/* Icon */}
+                  <div className="relative mb-6">
+                    <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${value.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <value.icon className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="text-center">
+                    <h3 className="text-xl font-argent text-secondary mb-4 group-hover:text-amber-800 transition-colors duration-300">
+                      {value.title}
+                    </h3>
+                    <p className="text-secondary/70 leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                  
+                  {/* Background decoration */}
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-primary/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-tr from-primary/10 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </motion.div>
             ))}
           </div>
