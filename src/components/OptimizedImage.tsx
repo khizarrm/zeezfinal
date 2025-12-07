@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { applyWatermark } from '../utils/watermark';
 
 interface OptimizedImageProps {
   src: string;
@@ -7,7 +8,7 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   lazy?: boolean;
-  quality?: number;
+  watermark?: boolean;
 }
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -17,12 +18,14 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   width,
   height,
   lazy = true,
-  quality = 80,
+  watermark = true,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(!lazy);
   const [isError, setIsError] = useState(false);
+  const [watermarkedSrc, setWatermarkedSrc] = useState<string | null>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!lazy) {
@@ -40,12 +43,47 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       { threshold: 0.1, rootMargin: '200px' }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
     }
 
     return () => observer.disconnect();
   }, [lazy]);
+
+  useEffect(() => {
+    if (!isInView || !src || !watermark) {
+      setWatermarkedSrc(null);
+      return;
+    }
+
+    let cancelled = false;
+
+    const processWatermark = async () => {
+      try {
+        const result = await applyWatermark(src, {
+          text: 'ZEEZ CREATIONS',
+          opacity: 0.12,
+          fontSize: 20,
+          color: '#ffffff',
+          rotate: -25,
+          tile: true,
+        });
+        if (!cancelled) {
+          setWatermarkedSrc(result);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setWatermarkedSrc(null);
+        }
+      }
+    };
+
+    processWatermark();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isInView, src, watermark]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -57,9 +95,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     setIsLoaded(false);
   };
 
+  const displaySrc = watermark && watermarkedSrc ? watermarkedSrc : src;
+
   return (
     <div
-      ref={imgRef}
+      ref={containerRef}
       className={`relative overflow-hidden ${className}`}
       style={{ 
         width: width ? `${width}px` : '100%',
@@ -87,9 +127,10 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       )}
 
       {/* Actual image */}
-      {isInView && src && (
+      {isInView && displaySrc && (
         <img
-          src={src}
+          ref={imgRef}
+          src={displaySrc}
           alt={alt}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
