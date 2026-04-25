@@ -6,22 +6,7 @@ import logo from '../images/logo.png';
 import heroImage from '../pages/project-photos/rebero-rooftop/01.jpg';
 import gridImage1 from '../pages/project-photos/seeds-residences/penthouse/01.jpg';
 import gridImage2 from '../pages/project-photos/iwave-office/01.jpg';
-
-import projectRebero from '../pages/project-photos/rebero-rooftop/02.jpg';
-import projectIwave from '../pages/project-photos/iwave-office/02.jpg';
-import projectSeeds from '../pages/project-photos/seeds-residences/penthouse/02.jpg';
-import projectGolfView from '../pages/project-photos/golf-view/01.jpg';
-import projectFaysal from '../pages/project-photos/king-faysal-view/01.jpg';
-import projectMrFish from '../pages/project-photos/mr-fish/g-01.jpg';
-
-const featuredProjects = [
-  { name: 'Rebero Mansion Rooftop', category: 'Interior Design', image: projectRebero },
-  { name: 'Iwave Real Estate Office', category: 'Interior Design', image: projectIwave },
-  { name: 'Seeds Residences', category: 'Interior Design', image: projectSeeds },
-  { name: 'Golf View Apartment', category: 'Interior Design', image: projectGolfView },
-  { name: 'King Faysal View Apartment', category: 'Interior Design', image: projectFaysal },
-  { name: 'Mr. Fish Restaurant', category: 'Interior Design', image: projectMrFish },
-];
+import { PROJECTS } from './projectsData';
 
 const InstagramIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -233,22 +218,22 @@ function Home() {
           className="flex gap-4 sm:gap-5 overflow-x-auto pl-10 pr-6 sm:pl-16 sm:pr-8 snap-x snap-mandatory scrollbar-hide"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {featuredProjects.map((project) => (
+          {PROJECTS.map((project) => (
             <Link
-              key={project.name}
+              key={project.id}
               to="/projects"
               className="flex-shrink-0 snap-start group"
             >
               <div className="w-[55vw] sm:w-[30vw] lg:w-[22vw] overflow-hidden">
                 <img
-                  src={project.image}
-                  alt={project.name}
+                  src={project.images[0]}
+                  alt={project.title}
                   className="w-full aspect-[3/4] object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 />
               </div>
               <div className="mt-3">
                 <p className="font-outfit text-sm text-primary font-medium">
-                  {project.name}
+                  {project.title}
                 </p>
                 <p className="font-outfit text-xs text-primary/40 tracking-wide uppercase">
                   {project.category}
