@@ -1,8 +1,27 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, X, Mail, MapPin } from 'lucide-react';
+import { X, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logo from '../images/white-logo.png';
+import logo from '../images/logo.png';
+import heroImage from '../pages/project-photos/rebero-rooftop/01.jpg';
+import gridImage1 from '../pages/project-photos/seeds-residences/penthouse/01.jpg';
+import gridImage2 from '../pages/project-photos/iwave-office/01.jpg';
+
+import projectRebero from '../pages/project-photos/rebero-rooftop/02.jpg';
+import projectIwave from '../pages/project-photos/iwave-office/02.jpg';
+import projectSeeds from '../pages/project-photos/seeds-residences/penthouse/02.jpg';
+import projectGolfView from '../pages/project-photos/golf-view/01.jpg';
+import projectFaysal from '../pages/project-photos/king-faysal-view/01.jpg';
+import projectMrFish from '../pages/project-photos/mr-fish/g-01.jpg';
+
+const featuredProjects = [
+  { name: 'Rebero Mansion Rooftop', category: 'Interior Design', image: projectRebero },
+  { name: 'Iwave Real Estate Office', category: 'Interior Design', image: projectIwave },
+  { name: 'Seeds Residences', category: 'Interior Design', image: projectSeeds },
+  { name: 'Golf View Apartment', category: 'Interior Design', image: projectGolfView },
+  { name: 'King Faysal View Apartment', category: 'Interior Design', image: projectFaysal },
+  { name: 'Mr. Fish Restaurant', category: 'Interior Design', image: projectMrFish },
+];
 
 const InstagramIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -59,54 +78,207 @@ function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-primary flex items-center justify-center px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="text-center max-w-xl"
-      >
-        <motion.img
-          src={logo}
-          alt="Zeez Creations"
-          className="h-40 sm:h-48 w-auto mx-auto mb-12"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        />
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-secondary/70 text-lg leading-relaxed mb-12 font-outfit"
-        >
-          Creating timeless spaces that inspire and elevate everyday living. 
-          We deliver world-class interior design and handcrafted decor throughout Kigali.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+    <div className="min-h-screen bg-secondary">
+      {/* Navigation */}
+      <nav className="flex items-center justify-between px-6 sm:px-8 py-6">
+        <div className="flex items-center gap-8">
+          <Link
+            to="/about"
+            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
+          >
+            About
+          </Link>
           <Link
             to="/projects"
-            className="inline-flex items-center px-8 py-3.5 bg-secondary text-primary font-medium rounded-full hover:bg-secondary/90 transition-colors w-full sm:w-auto justify-center"
+            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
           >
-            View Portfolio
-            <ArrowRight className="ml-2" size={18} />
+            Portfolio
           </Link>
+        </div>
 
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+          <img
+            src={logo}
+            alt="Zeez Creations"
+            className="h-16 sm:h-20 w-auto"
+          />
+        </Link>
+
+        <div className="flex items-center gap-8">
+          <Link
+            to="/services"
+            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
+          >
+            Services
+          </Link>
           <button
             onClick={() => setIsContactOpen(true)}
-            className="inline-flex items-center px-8 py-3.5 border-2 border-secondary text-secondary font-medium rounded-full hover:bg-secondary hover:text-primary transition-colors w-full sm:w-auto justify-center"
+            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
           >
-            Contact Us
+            Contact
           </button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </nav>
+
+      {/* Hero Section — full viewport frame */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        className="px-6 sm:px-8 pb-6 sm:pb-8"
+      >
+        <div className="relative">
+          <div className="relative overflow-hidden">
+            <img
+              src={heroImage}
+              alt="Zeez Creations — Luxury Interior Design"
+              className="w-full h-[calc(100vh-7.5rem)] object-cover"
+            />
+            {/* Text overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="font-argent text-3xl sm:text-4xl lg:text-5xl text-white text-center leading-snug italic px-8"
+                style={{ textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}
+              >
+                Timeless Spaces, Crafted
+                <br />
+                with Intention
+              </motion.h2>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Intro + CTA */}
+      <motion.section
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="text-center px-6 pb-16"
+      >
+        <p className="font-outfit text-primary/60 text-base sm:text-lg max-w-md mx-auto leading-relaxed mb-6">
+          Creating timeless spaces that inspire and elevate everyday living —
+          world-class interior design and handcrafted decor in Kigali.
+        </p>
+        <Link
+          to="/projects"
+          className="inline-block font-outfit text-sm tracking-wide text-primary border-b border-primary/40 pb-0.5 hover:border-primary transition-colors"
+        >
+          View Portfolio
+        </Link>
+      </motion.section>
+
+      {/* Two-Column Image Grid — same width as hero */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.8 }}
+        className="px-6 sm:px-8 pb-8"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="overflow-hidden">
+            <img
+              src={gridImage1}
+              alt="Seeds Penthouse design by Zeez Creations"
+              className="w-full h-[50vh] sm:h-[70vh] object-cover hover:scale-[1.03] transition-transform duration-700"
+            />
+          </div>
+          <div className="overflow-hidden">
+            <img
+              src={gridImage2}
+              alt="Golf View Apartments design by Zeez Creations"
+              className="w-full h-[50vh] sm:h-[70vh] object-cover hover:scale-[1.03] transition-transform duration-700"
+            />
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Approach / Philosophy */}
+      <motion.section
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.7 }}
+        className="px-6 sm:px-8 pt-16 pb-24"
+      >
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="font-outfit text-primary/60 text-base sm:text-lg leading-relaxed mb-8">
+            Every space tells a story. We begin by listening — understanding how you live,
+            what inspires you, and the feeling you want to come home to. From there, we layer
+            textures, light, and intention to craft interiors that are as functional as they
+            are beautiful. Our process is deeply collaborative, rooted in trust, and always
+            guided by a belief that thoughtful design has the power to transform everyday life.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-block font-outfit text-sm tracking-wide text-primary border-b border-primary/40 pb-0.5 hover:border-primary transition-colors"
+          >
+            Work With Us
+          </Link>
+        </div>
+      </motion.section>
+
+      {/* Projects Carousel */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.7 }}
+        className="pb-24"
+      >
+        <div
+          className="flex gap-4 sm:gap-5 overflow-x-auto pl-10 pr-6 sm:pl-16 sm:pr-8 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {featuredProjects.map((project) => (
+            <Link
+              key={project.name}
+              to="/projects"
+              className="flex-shrink-0 snap-start group"
+            >
+              <div className="w-[55vw] sm:w-[30vw] lg:w-[22vw] overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full aspect-[3/4] object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                />
+              </div>
+              <div className="mt-3">
+                <p className="font-outfit text-sm text-primary font-medium">
+                  {project.name}
+                </p>
+                <p className="font-outfit text-xs text-primary/40 tracking-wide uppercase">
+                  {project.category}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </motion.section>
+
+      <div className="h-16" />
+      {/* Footer */}
+      <footer className="fixed bottom-0 left-0 right-0 z-40 bg-secondary border-t border-primary/10 px-6 sm:px-8 py-6">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="font-outfit text-xs text-primary/30">
+            &copy; {new Date().getFullYear()} Zeez Creations
+          </p>
+          <div className="flex items-center gap-6">
+            <Link to="/about" className="font-outfit text-xs text-primary/40 hover:text-primary transition-colors">About</Link>
+            <Link to="/projects" className="font-outfit text-xs text-primary/40 hover:text-primary transition-colors">Portfolio</Link>
+            <Link to="/services" className="font-outfit text-xs text-primary/40 hover:text-primary transition-colors">Services</Link>
+            <button onClick={() => setIsContactOpen(true)} className="font-outfit text-xs text-primary/40 hover:text-primary transition-colors">Contact</button>
+          </div>
+          <div className="flex items-center gap-5">
+            <a href="https://www.instagram.com/zeezcreationskigali/" target="_blank" rel="noopener noreferrer" className="text-primary/30 hover:text-primary transition-colors"><InstagramIcon /></a>
+            <a href="https://www.facebook.com/p/Zeez-Creations-100089067046265/" target="_blank" rel="noopener noreferrer" className="text-primary/30 hover:text-primary transition-colors"><FacebookIcon /></a>
+            <a href="https://wa.me/250791702562" target="_blank" rel="noopener noreferrer" className="text-primary/30 hover:text-primary transition-colors"><WhatsAppIcon /></a>
+          </div>
+        </div>
+      </footer>
 
       {/* Contact Modal */}
       <AnimatePresence>
@@ -116,7 +288,7 @@ function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
             onClick={() => setIsContactOpen(false)}
           >
             <motion.div
@@ -124,7 +296,7 @@ function Home() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="relative bg-secondary/80 backdrop-blur-xl rounded-2xl p-8 max-w-sm w-full shadow-2xl border border-secondary/20"
+              className="relative bg-secondary rounded-2xl p-8 max-w-sm w-full shadow-2xl border border-primary/10"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -146,7 +318,7 @@ function Home() {
                     href={contact.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-3 rounded-xl bg-primary/5 hover:bg-primary/15 transition-colors group border border-transparent hover:border-primary/10"
+                    className="flex items-center gap-4 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors group border border-transparent hover:border-primary/10"
                   >
                     <div className="p-2.5 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-secondary transition-colors">
                       <contact.icon />

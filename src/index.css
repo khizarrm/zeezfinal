@@ -7,7 +7,8 @@
 @layer base {
   html, body {
     font-family: 'Outfit', sans-serif;
-    background-color: #0a0a0a;
+    background-color: #f5f0ea;
+    color: #2a2a2a;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -16,7 +17,7 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(to bottom, rgba(35, 31, 32, 0.5), rgba(35, 31, 32, 0.2));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
 }
 
 .text-balance {
@@ -34,4 +35,8 @@
 
 .animate-shimmer {
   animation: shimmer 2s infinite;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

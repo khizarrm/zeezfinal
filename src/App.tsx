@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-primary">
+      <div className="min-h-screen bg-secondary">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
