@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logo from '../images/logo.png';
+import Header from '../components/Header';
 import heroImage from '../pages/project-photos/rebero-rooftop/01.jpg';
 import gridImage1 from '../pages/project-photos/seeds-residences/penthouse/01.jpg';
 import gridImage2 from '../pages/project-photos/iwave-office/01.jpg';
@@ -64,46 +64,7 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      {/* Navigation */}
-      <nav className="flex items-center justify-between px-6 sm:px-8 py-6">
-        <div className="flex items-center gap-8">
-          <Link
-            to="/about"
-            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
-          >
-            About
-          </Link>
-          <Link
-            to="/projects"
-            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
-          >
-            Portfolio
-          </Link>
-        </div>
-
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-          <img
-            src={logo}
-            alt="Zeez Creations"
-            className="h-16 sm:h-20 w-auto"
-          />
-        </Link>
-
-        <div className="flex items-center gap-8">
-          <Link
-            to="/services"
-            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
-          >
-            Services
-          </Link>
-          <button
-            onClick={() => setIsContactOpen(true)}
-            className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit"
-          >
-            Contact
-          </button>
-        </div>
-      </nav>
+      <Header onContactClick={() => setIsContactOpen(true)} />
 
       {/* Hero Section — full viewport frame */}
       <motion.section
@@ -117,7 +78,7 @@ function Home() {
             <img
               src={heroImage}
               alt="Zeez Creations — Luxury Interior Design"
-              className="w-full h-[calc(100vh-7.5rem)] object-cover"
+              className="w-full h-[calc(100svh-6.5rem)] sm:h-[calc(100svh-7.5rem)] object-cover"
             />
             {/* Text overlay */}
             <div className="absolute inset-0 flex items-center justify-center">

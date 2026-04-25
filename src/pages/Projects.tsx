@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { applyWatermark } from '../utils/watermark';
-import logo from '../images/logo.png';
+import Header from '../components/Header';
 import { PROJECTS, ProjectMeta } from './projectsData';
 
 function Projects() {
@@ -73,20 +73,7 @@ function Projects() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      {/* Navigation */}
-      <nav className="flex items-center justify-between px-6 sm:px-8 py-6">
-        <div className="flex items-center gap-8">
-          <Link to="/about" className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit">About</Link>
-          <Link to="/projects" className="text-sm tracking-[0.15em] uppercase text-primary hover:text-primary transition-colors font-outfit">Portfolio</Link>
-        </div>
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-          <img src={logo} alt="Zeez Creations" className="h-16 sm:h-20 w-auto" />
-        </Link>
-        <div className="flex items-center gap-8">
-          <Link to="/services" className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit">Services</Link>
-          <Link to="/contact" className="text-sm tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors font-outfit">Contact</Link>
-        </div>
-      </nav>
+      <Header />
 
       {/* Page Header */}
       <div className="text-center pt-6 pb-6 px-6">
@@ -176,7 +163,7 @@ function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-8 bg-black/80 sm:bg-black/70 backdrop-blur-sm"
             onClick={handleCloseModal}
           >
             <motion.div
@@ -184,25 +171,27 @@ function Projects() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="relative bg-secondary rounded-xl overflow-hidden max-w-5xl w-full h-[88vh] shadow-2xl flex flex-col"
+              className="relative bg-secondary sm:rounded-xl overflow-hidden max-w-5xl w-full h-[100dvh] sm:h-[88vh] shadow-2xl flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={handleCloseModal}
-                className="absolute top-4 right-4 z-20 p-2 bg-secondary/80 backdrop-blur-sm rounded-full text-primary/60 hover:text-primary transition-colors"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2.5 bg-secondary/80 backdrop-blur-sm rounded-full text-primary/70 hover:text-primary transition-colors"
+                style={{ top: 'max(env(safe-area-inset-top), 0.75rem)' }}
                 aria-label="Close modal"
               >
-                <X size={18} />
+                <X size={20} />
               </button>
 
-              <div className="relative flex-1 min-h-0 bg-primary/5 overflow-hidden">
+              <div className="relative flex-1 min-h-0 bg-black/5 overflow-hidden touch-pan-y">
                 <AnimatePresence mode="wait">
                   {galleryImages.length > 0 ? (
                     <motion.img
                       key={currentImageIndex}
                       src={galleryImages[currentImageIndex]}
                       alt={`${selectedProject.title} — ${currentImageIndex + 1}`}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-contain select-none"
+                      draggable={false}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
@@ -216,37 +205,73 @@ function Projects() {
                 </AnimatePresence>
 
                 {galleryImages.length > 1 && (
+                  <motion.div
+                    className="absolute inset-0 z-10"
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.18}
+                    onDragEnd={(_, info) => {
+                      if (info.offset.x < -60 || info.velocity.x < -400) goToNext();
+                      else if (info.offset.x > 60 || info.velocity.x > 400) goToPrevious();
+                    }}
+                  />
+                )}
+
+                {galleryImages.length > 1 && (
                   <>
                     <button
                       onClick={goToPrevious}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-secondary/80 backdrop-blur-sm rounded-full text-primary/60 hover:text-primary transition-colors"
+                      className="hidden sm:block absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-secondary/80 backdrop-blur-sm rounded-full text-primary/60 hover:text-primary transition-colors"
                       aria-label="Previous image"
                     >
                       <ChevronLeft size={20} />
                     </button>
                     <button
                       onClick={goToNext}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-secondary/80 backdrop-blur-sm rounded-full text-primary/60 hover:text-primary transition-colors"
+                      className="hidden sm:block absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-secondary/80 backdrop-blur-sm rounded-full text-primary/60 hover:text-primary transition-colors"
                       aria-label="Next image"
                     >
                       <ChevronRight size={20} />
                     </button>
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-secondary/80 backdrop-blur-sm rounded-full text-xs text-primary/60 font-outfit">
+                    <div
+                      className="absolute z-20 px-3 py-1.5 bg-secondary/80 backdrop-blur-sm rounded-full text-xs text-primary/70 font-outfit pointer-events-none left-1/2 -translate-x-1/2 bottom-3 sm:bottom-4"
+                    >
                       {currentImageIndex + 1} / {galleryImages.length}
                     </div>
                   </>
                 )}
               </div>
 
-              <div className="flex-shrink-0 px-5 sm:px-6 py-4 border-t border-primary/10 flex items-center justify-between gap-4">
+              <div
+                className="flex-shrink-0 px-5 sm:px-6 py-3 sm:py-4 border-t border-primary/10 flex items-center justify-between gap-4"
+                style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 0.75rem)' }}
+              >
                 <div className="min-w-0">
                   <p className="font-outfit text-[10px] text-primary/40 uppercase tracking-[0.18em] mb-0.5 truncate">
                     {selectedProject.category}
                   </p>
-                  <h2 className="font-argent text-base sm:text-lg text-primary truncate">
+                  <h2 className="font-argent text-sm sm:text-lg text-primary truncate">
                     {selectedProject.title}
                   </h2>
                 </div>
+                {galleryImages.length > 1 && (
+                  <div className="sm:hidden flex items-center gap-2 flex-shrink-0">
+                    <button
+                      onClick={goToPrevious}
+                      className="p-2 bg-primary/5 active:bg-primary/15 rounded-full text-primary/70 transition-colors"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                    <button
+                      onClick={goToNext}
+                      className="p-2 bg-primary/5 active:bg-primary/15 rounded-full text-primary/70 transition-colors"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  </div>
+                )}
               </div>
             </motion.div>
           </motion.div>
