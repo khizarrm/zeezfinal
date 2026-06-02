@@ -21,6 +21,7 @@ const seedsOneBed = eagerSorted(import.meta.glob('./project-photos/seeds-residen
 const seedsPenthouse = eagerSorted(import.meta.glob('./project-photos/seeds-residences/penthouse/*.jpg', { eager: true, import: 'default' }) as Record<string, string>);
 const seedsTwoBed = eagerSorted(import.meta.glob('./project-photos/seeds-residences/two-bedroom/*.jpg', { eager: true, import: 'default' }) as Record<string, string>);
 const seedsThreeBed = eagerSorted(import.meta.glob('./project-photos/seeds-residences/three-bedroom/*.jpg', { eager: true, import: 'default' }) as Record<string, string>);
+const theNest = eagerSorted(import.meta.glob('./project-photos/the-nest/*.jpg', { eager: true, import: 'default' }) as Record<string, string>);
 
 // const trays = eagerSorted(import.meta.glob('./project-photos/trays-coasters-placemats/*.jpg', { eager: true, import: 'default' }) as Record<string, string>);
 // const tables = eagerSorted(import.meta.glob('./project-photos/tables/*.jpg', { eager: true, import: 'default' }) as Record<string, string>);
@@ -39,6 +40,7 @@ export const PROJECTS: ProjectMeta[] = [
   { id: 6, title: 'Kibagabaga Residence', category: 'Interior Design', images: kibagabaga },
   { id: 7, title: 'Urban Park Suites Hotel', category: 'Interior Design', images: urbanPark },
   { id: 8, title: 'Residential Balcony', category: 'Interior Design', images: balcony },
+  { id: 16, title: 'The Nest', category: 'Interior Design', images: theNest },
   // { id: 9, title: 'Trays, Coasters, Placemats', category: 'Handmade Decor', images: trays },
   // { id: 10, title: 'Butler Tables', category: 'Handmade Decor', images: tables },
   // { id: 11, title: 'Vases & Holders', category: 'Handmade Decor', images: vases },
