@@ -5,6 +5,10 @@ backend:
   repo: khizarrm/zeezfinal
   branch: main
 
+# Default for uploads outside a project; project photos go in each project's own folder.
+media_folder: public/uploads
+public_folder: /uploads
+
 # Shrink big phone/camera photos on upload.
 media_libraries:
   all:
