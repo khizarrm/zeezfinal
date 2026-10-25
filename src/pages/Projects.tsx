@@ -10,7 +10,7 @@ function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectMeta | null>(null);
   const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [watermarkCache, setWatermarkCache] = useState<Record<number, string[]>>({});
+  const [watermarkCache, setWatermarkCache] = useState<Record<string, string[]>>({});
 
   const handleOpenProject = async (project: ProjectMeta) => {
     setSelectedProject(project);

@@ -1,0 +1,13 @@
+{
+  "title": "Residential Balcony",
+  "category": "Interior Design",
+  "order": 11,
+  "visible": true,
+  "images": [
+    "balcony.jpg",
+    "closeup-table.jpg",
+    "couch.jpg",
+    "far-shot.jpg",
+    "plants.jpg"
+  ]
+}

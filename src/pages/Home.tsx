@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import heroImage from '../pages/project-photos/rebero-rooftop/01.jpg';
-import gridImage1 from '../pages/project-photos/seeds-residences/penthouse/01.jpg';
-import gridImage2 from '../pages/project-photos/iwave-office/01.jpg';
+import heroImage from '../content/projects/rebero-mansion-rooftop/01.jpg';
+import gridImage1 from '../content/projects/seeds-penthouse/01.jpg';
+import gridImage2 from '../content/projects/iwave-real-estate-office/01.jpg';
 import { PROJECTS } from './projectsData';
 
 const InstagramIcon = () => (
