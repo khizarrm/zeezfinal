@@ -1,0 +1,61 @@
+# Admin for the portfolio, served at /admin. Saving here commits to GitHub,
+# which triggers a Netlify rebuild (~1–2 min until it's live).
+backend:
+  name: github
+  repo: khizarrm/zeezfinal
+  branch: main
+
+# Shrink big phone/camera photos on upload.
+media_libraries:
+  all:
+    transformations:
+      raster_image:
+        format: webp
+        quality: 85
+        width: 2400
+        height: 2400
+
+collections:
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    path: '{{slug}}/index'
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: '{{title}}'
+    summary: '{{order}}. {{title}} · {{category}}'
+    media_folder: ''
+    public_folder: ''
+    sortable_fields:
+      fields: [order, title, category]
+      default:
+        field: order
+        direction: ascending
+    fields:
+      - name: title
+        label: Title
+        widget: string
+      - name: category
+        label: Category
+        widget: select
+        options: [Interior Design, Handmade Decor, Furniture Refurbishing]
+        default: Interior Design
+      - name: order
+        label: Position on site
+        hint: Lower numbers show first (1 = top of the page).
+        widget: number
+        value_type: int
+        default: 100
+      - name: visible
+        label: Show on website
+        widget: boolean
+        default: true
+      - name: images
+        label: Photos
+        hint: The first photo is the cover. Drag to reorder.
+        widget: image
+        multiple: true
+        min: 1

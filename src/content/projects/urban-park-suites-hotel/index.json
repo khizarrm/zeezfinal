@@ -1,0 +1,14 @@
+{
+  "title": "Urban Park Suites Hotel",
+  "category": "Interior Design",
+  "order": 10,
+  "visible": true,
+  "images": [
+    "main-reception-2.jpeg",
+    "main-reception.jpeg",
+    "reception-after.jpeg",
+    "shelf.jpeg",
+    "spa-room.jpeg",
+    "waiting-area.jpeg"
+  ]
+}
